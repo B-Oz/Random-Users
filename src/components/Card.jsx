@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "./card.css";
 
@@ -10,34 +10,55 @@ const Card = () => {
     axios("https://randomuser.me/api/")
       .then((res) => {
         console.log(res);
-        setData(res.data.result[0]);
+        setData(res.data.results[0]);
       })
       .catch((err) => console.log(err));
   };
 
-  getApi();
+  useEffect(() => {
+    getApi();
+  }, []);
 
   return (
     <div className=" app  d-flex justify-content-center align-items-center flex-column ">
-      <div className="card ">
-        <div className="up d-flex flex-row justify-content-center ">
-          <img className="m-3 photo" src="./salı.jpg" alt="user-img" />
-          <p className="m-3">Beyza Özbilgin</p>
+      {data && (
+        <div className="card ">
+          <div className="up d-flex flex-row justify-content-center ">
+            <img
+              className="m-3 photo"
+              src={data.picture.medium}
+              alt="user-img"
+            />
+            <p className="m-3">
+              {data.name.title} {data.name.first} {data.name.last}
+            </p>
+          </div>
+          <div className="card-body">
+            <ul className="list-group list-group-flush ">
+              <li className="list-group-item bg-transparent">
+                {" "}
+                Email: {data.email}
+              </li>
+              <li className="list-group-item bg-transparent">
+                Phone: {data.phone}
+              </li>
+              <li className="list-group-item bg-transparent">
+                {" "}
+                Adress:
+                {data.location.city}-{data.location.country}
+              </li>
+            </ul>
+          </div>
+          <div className="card-footer">
+            <p>Age : {data.dob.age}</p>
+            <p> Register Date: {data.registered.date.slice(0, 10)}</p>
+          </div>
         </div>
-        <div className="card-body">
-          <ul className="list-group list-group-flush ">
-            <li className="list-group-item bg-transparent"> mail</li>
-            <li className="list-group-item bg-transparent">telefon</li>
-            <li className="list-group-item bg-transparent">adres</li>
-          </ul>
-        </div>
-        <div className="card-footer">
-          <p>Age : 26</p>
-          <p> Register Date: 2004-07-31</p>
-        </div>
-      </div>
+      )}
 
-      <button className="btn btn-primary m-3">Random User</button>
+      <button onClick={() => getApi()} className="btn btn-primary m-3">
+        Random User
+      </button>
     </div>
   );
 };
