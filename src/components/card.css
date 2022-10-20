@@ -7,3 +7,9 @@
 .app {
   margin-top: 10rem;
 }
+
+.photo {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+}
