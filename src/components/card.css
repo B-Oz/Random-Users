@@ -1,0 +1,9 @@
+.card {
+  width: 25rem;
+  border: 1px solid black;
+  background-color: rgb(136, 230, 234);
+}
+
+.app {
+  margin-top: 10rem;
+}
