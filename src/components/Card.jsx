@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./card.css";
-
-// import { FaBeer } from "@react-icons/all-files/fa/FaBeer";
+import { AiTwotonePhone, AiOutlineMail } from "react-icons/ai";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 
 const Card = () => {
   const [data, setData] = useState(null);
@@ -36,14 +36,15 @@ const Card = () => {
           <div className="card-body">
             <ul className="list-group list-group-flush ">
               <li className="list-group-item bg-transparent">
-                {" "}
+                <AiOutlineMail className="text-2xl" />
                 Email: {data.email}
               </li>
               <li className="list-group-item bg-transparent">
+                <AiTwotonePhone className="text-2xl" />
                 Phone: {data.phone}
               </li>
               <li className="list-group-item bg-transparent">
-                {" "}
+                <HiOutlineLocationMarker className="text-2xl" />
                 Adress:
                 {data.location.city}-{data.location.country}
               </li>
